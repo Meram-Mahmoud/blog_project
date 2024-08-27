@@ -177,8 +177,9 @@ test_*.xml
 .dmypy.json
 .pytype/
 
-# pytest
-.cache/
 
 # Jupyter Notebook
 .ipynb_checkpoints/
+
+# Ignore system and application data
+AppData/
