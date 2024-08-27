@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+        <p><strong>Author:</strong> {{ post.author.username }}</p>
+        <p><strong>Created at:</strong> {{ post.created_at }}</p>
+        <p><strong>Updated at:</strong> {{ post.updated_at }}</p>
+
+        <p>{{ post.content }}</p>
+        
+        {% if user.is_authenticated %}
+            {% if user == post.author %}
+                <a href="{% url 'post_edit' post.pk %}" class="btn btn-primary">Edit</a>
+                <form action="{% url 'post_delete' post.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            {% endif %}
+        {% endif %}
+        
+        <a href="{% url 'post_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</body>
+</html>
+
